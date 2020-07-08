@@ -1,0 +1,2 @@
+rootProject.name='Netguru Application'
+include ':app'
