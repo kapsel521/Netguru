@@ -16,6 +16,8 @@ class EditNoteActivity : AppCompatActivity() {
     private lateinit var idED: EditText
     private lateinit var listED: EditText
     private lateinit var saveListBtn: Button
+    private lateinit var currentLists: Button
+    private lateinit var archivedLists: Button
     private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +29,17 @@ class EditNoteActivity : AppCompatActivity() {
         idED = findViewById(R.id.id)
         listED = findViewById(R.id.list_edit_text)
         saveListBtn = findViewById(R.id.save_list)
+        currentLists = findViewById(R.id.current_lists)
+        archivedLists = findViewById(R.id.archivedLists)
+
+        currentLists.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+        archivedLists.setOnClickListener{
+            startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
+            finish()
+        }
 
         saveListBtn.setOnClickListener {
             saveListToDB()

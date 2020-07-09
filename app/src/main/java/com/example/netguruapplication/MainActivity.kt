@@ -1,9 +1,11 @@
 package com.example.netguruapplication
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -40,11 +42,6 @@ class MainActivity : AppCompatActivity() {
         listRV.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
 
         getAllNotes()
-//        val exampleList = generateDummyList(500)
-//
-//        recyclerView.adapter = RecyclerViewAdapter(exampleList)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.setHasFixedSize(true)
 
     }
 
@@ -56,13 +53,8 @@ class MainActivity : AppCompatActivity() {
         listRV.adapter!!.notifyDataSetChanged()
     }
 
-//    private fun generateDummyList(size: Int): List<CardDataClass>{
-//        val list = ArrayList<CardDataClass>()
-//
-//        for(i in 0 until size){
-//            val item = CardDataClass("Item $i","Line2")
-//            list += item
-//        }
-//        return list
-//    }
 }
+
+
+
+

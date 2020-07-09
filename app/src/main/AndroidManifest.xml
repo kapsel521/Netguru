@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ArchivedShoppingListsActivity"></activity>
+        <activity android:name=".ArchivedNoteDetailsActivity"></activity>
+        <activity android:name=".ArchivedShoppingListsActivity" />
         <activity android:name=".EditNoteActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

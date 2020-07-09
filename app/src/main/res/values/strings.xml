@@ -5,5 +5,7 @@
     <string name="save_shopping_list">save shopping list</string>
     <string name="add_list">Add List</string>
     <string name="archived_lists">Archived Lists</string>
-    <string name="current_lists">current_lists</string>
+    <string name="current_lists">current lists</string>
+    <string name="remove_shopping_list">remove shopping list</string>
+    <string name="remove_list">remove list</string>
 </resources>
