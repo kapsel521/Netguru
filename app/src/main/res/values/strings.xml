@@ -3,4 +3,7 @@
     <string name="shopping_list">Shopping List</string>
     <string name="list_of_things">List of things</string>
     <string name="save_shopping_list">save shopping list</string>
+    <string name="add_list">Add List</string>
+    <string name="archived_lists">Archived Lists</string>
+    <string name="current_lists">current_lists</string>
 </resources>

@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recyclerArchivedView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -15,30 +15,20 @@
         android:layout_margin="8dp"
         android:layout_above="@id/linearLayout"
         tools:listitem="@layout/card_view_layout" />
-<LinearLayout
-    android:id="@+id/linearLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:layout_alignParentBottom="true" >
-
-
-    <Button
-        android:id="@+id/archivedLists"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_weight="1"
-        android:text="@string/archived_lists"
-        />
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentBottom="true" >
 
-    <Button
-        android:id="@+id/addList"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_weight="2"
-        android:text="@string/add_list"
-        />
-
-</LinearLayout>
+        <Button
+            android:id="@+id/currentList"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="@string/current_lists"
+            />
+    </LinearLayout>
 
 </RelativeLayout>

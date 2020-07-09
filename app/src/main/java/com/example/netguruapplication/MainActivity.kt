@@ -13,6 +13,7 @@ import io.realm.RealmResults
 class MainActivity : AppCompatActivity() {
 
     private lateinit var addList: Button
+    private lateinit var archivedLists: Button
     private lateinit var listRV: RecyclerView
     private lateinit var shopList: ArrayList<Notes>
     private lateinit var realm: Realm
@@ -24,10 +25,15 @@ class MainActivity : AppCompatActivity() {
 
         realm = Realm.getDefaultInstance()
         addList = findViewById(R.id.addList)
+        archivedLists = findViewById(R.id.archivedLists)
         listRV = findViewById(R.id.recyclerView)
 
         addList.setOnClickListener {
             startActivity(Intent(this, EditNoteActivity::class.java))
+            finish()
+        }
+        archivedLists.setOnClickListener {
+            startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
             finish()
         }
 
