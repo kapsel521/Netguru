@@ -6,31 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".EditNoteActivity">
 
-    <EditText
-        android:id="@+id/title_edit_text"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:textColor="#000"
-        android:text="@string/shopping_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </EditText>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-203dp"
+        tools:layout_editor_absoluteY="188dp">
 
-    <EditText
-        android:id="@+id/shop_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        android:gravity="top"
-        android:text="@string/list_of_things"
-        android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toBottomOf="@+id/title_edit_text"
-        app:layout_constraintStart_toEndOf="@id/title_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/title_edit_text" />
+        <EditText
+            android:id="@+id/title_edit_text"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Write a title"
+            android:layout_margin="8dp"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:text="@string/shopping_list"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/list_edit_text"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Your shopping list"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            android:text="@string/list_of_things"
+            android:textColor="#000" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
