@@ -12,7 +12,11 @@ import io.realm.RealmResults
 import kotlinx.android.synthetic.main.activity_edit_note.view.*
 import kotlinx.android.synthetic.main.card_view_layout.view.*
 
-class RecyclerViewAdapter(private val context: Context?, private val shopList: RealmResults<Notes>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerViewAdapter(
+    private val context: Context?,
+    private val shopList: RealmResults<Notes>,
+    private val listener: OnItemClickListener
+): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view_layout, parent, false)
@@ -30,11 +34,25 @@ class RecyclerViewAdapter(private val context: Context?, private val shopList: R
         holder.itemView.id_view.text = shopList[position]!!.id.toString()
     }
 
-    class ViewHolder(v:View?): RecyclerView.ViewHolder(v!!){
+    inner class ViewHolder(v:View?): RecyclerView.ViewHolder(v!!), View.OnClickListener{
         val title = itemView.title_view
         val list = itemView.list_view
         val id = itemView.id_view
 
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+    }
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
     }
 
 }

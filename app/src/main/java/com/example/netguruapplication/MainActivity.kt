@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.realm.Realm
 import io.realm.RealmResults
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
 
     private lateinit var addList: Button
     private lateinit var archivedLists: Button
@@ -45,10 +45,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onItemClick(position: Int) {
+        startActivity(Intent(this, EditNoteActivity::class.java))
+        finish()
+    }
+
     private fun getAllNotes() {
         shopList = ArrayList()
         val results:RealmResults<Notes> = realm.where<Notes>(Notes::class.java).findAll()
-        listRV.adapter = RecyclerViewAdapter(this, results)
+        listRV.adapter = RecyclerViewAdapter(this, results, this)
         listRV.adapter!!.notifyDataSetChanged()
     }
 
