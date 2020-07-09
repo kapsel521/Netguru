@@ -1,5 +1,6 @@
 package com.example.netguruapplication
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
@@ -7,28 +8,33 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
+import io.realm.RealmResults
+import kotlinx.android.synthetic.main.activity_edit_note.view.*
 import kotlinx.android.synthetic.main.card_view_layout.view.*
 
-class RecyclerViewAdapter(private val exampleList: List<CardDataClass>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val context: Context?, private val shopList: RealmResults<Notes>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_view_layout, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view_layout, parent, false)
 
-        return ViewHolder(itemView)
+        return ViewHolder(v)
     }
 
-    override fun getItemCount() = exampleList.size
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = exampleList[position]
-
-        holder.textView1!!.text = currentItem.text1
-        holder.textView2!!.text = currentItem.text2
+    override fun getItemCount(): Int {
+        return shopList.size
     }
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-         val textView1: TextView? = itemView.text_view_1
-         val textView2: TextView? = itemView.text_view_2
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.itemView.title_view.text = shopList[position]!!.title
+        holder.itemView.list_view.text = shopList[position]!!.shopList
+        holder.itemView.id_view.text = shopList[position]!!.id.toString()
     }
+
+    class ViewHolder(v:View?): RecyclerView.ViewHolder(v!!){
+        val title = itemView.title_view
+        val list = itemView.list_view
+        val id = itemView.id_view
+
+    }
+
 }

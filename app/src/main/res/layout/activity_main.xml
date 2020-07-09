@@ -22,7 +22,7 @@
     android:layout_margin="8dp"
     android:layout_alignParentBottom="true" >
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/removeList"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -30,7 +30,7 @@
         android:text="remove List"
         />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/archiveList"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -38,12 +38,14 @@
         android:text="Archive List"
         />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/addList"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_weight="1"
         android:text="Add List"
         />
+
 </LinearLayout>
+
 </RelativeLayout>

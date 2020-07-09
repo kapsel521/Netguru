@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/card_view"
     android:layout_margin="4dp">
 
     <RelativeLayout
@@ -10,7 +11,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/text_view_1"
+            android:id="@+id/title_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -21,11 +22,18 @@
             ></TextView>
 
         <TextView
-            android:id="@+id/text_view_2"
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_1"
+            android:layout_below="@id/title_view"
             android:text="Line 2"></TextView>
 
+        <TextView
+            android:id="@+id/id_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_view"
+            android:visibility="gone"
+            android:text=""></TextView>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
