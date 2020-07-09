@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         realm = Realm.getDefaultInstance()
-        addList = findViewById(R.id.addList)
-        archivedLists = findViewById(R.id.archivedLists)
+        addList = findViewById(R.id.add_list)
+        archivedLists = findViewById(R.id.archived_lists)
         listRV = findViewById(R.id.recyclerView)
 
         addList.setOnClickListener {
@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
     private fun getAllNotes() {
         shopList = ArrayList()
         val results:RealmResults<Notes> = realm.where<Notes>(Notes::class.java).findAll()
-
         listRV.adapter = RecyclerViewAdapter(this, results)
         listRV.adapter!!.notifyDataSetChanged()
     }

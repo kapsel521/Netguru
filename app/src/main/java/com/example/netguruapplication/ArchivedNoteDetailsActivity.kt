@@ -17,7 +17,7 @@ class ArchivedNoteDetailsActivity : AppCompatActivity() {
 
         removeList = findViewById(R.id.remove_list)
         currentLists = findViewById(R.id.current_lists)
-        archivedLists = findViewById(R.id.archivedLists)
+        archivedLists = findViewById(R.id.archived_lists)
 
         currentLists.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))

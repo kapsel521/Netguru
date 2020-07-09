@@ -24,7 +24,7 @@
 
 
     <Button
-        android:id="@+id/archivedLists"
+        android:id="@+id/archived_lists"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_weight="1"
@@ -32,7 +32,7 @@
         />
 
     <Button
-        android:id="@+id/addList"
+        android:id="@+id/add_list"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_weight="2"

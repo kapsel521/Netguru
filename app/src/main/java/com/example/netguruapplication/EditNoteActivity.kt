@@ -30,7 +30,7 @@ class EditNoteActivity : AppCompatActivity() {
         listED = findViewById(R.id.list_edit_text)
         saveListBtn = findViewById(R.id.save_list)
         currentLists = findViewById(R.id.current_lists)
-        archivedLists = findViewById(R.id.archivedLists)
+        archivedLists = findViewById(R.id.archived_lists)
 
         currentLists.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
