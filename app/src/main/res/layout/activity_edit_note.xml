@@ -13,6 +13,9 @@
         tools:layout_editor_absoluteX="-203dp"
         tools:layout_editor_absoluteY="188dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/title_edit_text"
             android:inputType="text"
@@ -24,18 +27,37 @@
             android:gravity="center"
             android:text="@string/shopping_list"
             android:textColor="#000" />
+        <EditText
+            android:id="@+id/id"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="id"
+            android:layout_margin="8dp"
+            android:layout_weight="0.7"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#000" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/list_edit_text"
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="Your shopping list"
             android:layout_margin="8dp"
-            android:layout_weight="1"
+            android:layout_weight="1.8"
+            android:autofillHints="Your shopping list"
             android:gravity="top"
             android:text="@string/list_of_things"
             android:textColor="#000" />
+
+        <Button
+            android:id="@+id/save_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_shopping_list"
+            android:layout_weight="0.04"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
