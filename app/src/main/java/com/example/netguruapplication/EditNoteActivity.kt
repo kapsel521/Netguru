@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.annotation.RequiresPermission
 import io.realm.Realm
+import io.realm.kotlin.delete
 import java.lang.Exception
 
 class EditNoteActivity : AppCompatActivity() {
@@ -15,7 +15,7 @@ class EditNoteActivity : AppCompatActivity() {
     private lateinit var titleED: EditText
     private lateinit var idED: EditText
     private lateinit var listED: EditText
-    private lateinit var saveListBtn: Button
+    private lateinit var savedListBtn: Button
     private lateinit var currentLists: Button
     private lateinit var archivedLists: Button
     private lateinit var realm: Realm
@@ -28,7 +28,7 @@ class EditNoteActivity : AppCompatActivity() {
         titleED = findViewById(R.id.title_edit_text)
         idED = findViewById(R.id.id)
         listED = findViewById(R.id.list_edit_text)
-        saveListBtn = findViewById(R.id.save_list)
+        savedListBtn = findViewById(R.id.save_list)
         currentLists = findViewById(R.id.current_lists)
         archivedLists = findViewById(R.id.archived_lists)
 
@@ -41,7 +41,7 @@ class EditNoteActivity : AppCompatActivity() {
             finish()
         }
 
-        saveListBtn.setOnClickListener {
+        savedListBtn.setOnClickListener {
             saveListToDB()
         }
     }
@@ -52,6 +52,7 @@ class EditNoteActivity : AppCompatActivity() {
             realm.beginTransaction()
             val currentIdNumber:Number? = realm.where(Notes::class.java).max("id")
             val nextID:Int
+
             nextID = if (currentIdNumber == null){
                 1
             }else{

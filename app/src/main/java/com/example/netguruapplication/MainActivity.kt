@@ -1,11 +1,10 @@
 package com.example.netguruapplication
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import androidx.core.content.ContextCompat.startActivity
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -26,6 +25,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
         setContentView(R.layout.activity_main)
 
         realm = Realm.getDefaultInstance()
+
+
         addList = findViewById(R.id.add_list)
         archivedLists = findViewById(R.id.archived_lists)
         listRV = findViewById(R.id.recyclerView)
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
     }
 
     override fun onItemClick(position: Int) {
+        Toast.makeText(this, "item clicked: $position", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, EditNoteActivity::class.java))
         finish()
     }
@@ -58,6 +60,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
     }
 
 }
+
 
 
 
