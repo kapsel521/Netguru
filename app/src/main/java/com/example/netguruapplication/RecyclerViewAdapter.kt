@@ -11,7 +11,8 @@ import kotlinx.android.synthetic.main.card_view_layout.view.*
 class RecyclerViewAdapter(
     private val context: Context?,
     private val shopList: RealmResults<Notes>,
-    private val listener: OnItemClickListener
+    private val listener: OnItemClickListener,
+    private val listenerLong: OnLongItemClickListener
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -30,7 +31,8 @@ class RecyclerViewAdapter(
         holder.itemView.id_view.text = shopList[position]!!.id.toString()
     }
 
-    inner class ViewHolder(v:View?): RecyclerView.ViewHolder(v!!), View.OnClickListener{
+    inner class ViewHolder(v:View?): RecyclerView.ViewHolder(v!!), View.OnClickListener,
+    View.OnLongClickListener{
         val title = itemView.title_view
         val list = itemView.list_view
         val id = itemView.id_view
@@ -39,6 +41,9 @@ class RecyclerViewAdapter(
         init {
             itemView.setOnClickListener(this)
         }
+        init{
+            itemView.setOnLongClickListener(this)
+        }
 
         override fun onClick(v: View?) {
             val position = adapterPosition
@@ -46,9 +51,24 @@ class RecyclerViewAdapter(
                 listener.onItemClick(position)
             }
         }
+
+        override fun onLongClick(v: View?): Boolean {
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION) {
+                listenerLong.onLongItemClick(position)
+                return true
+            }
+            return false
+        }
+
+
     }
     interface OnItemClickListener{
         fun onItemClick(position: Int)
+    }
+
+    interface OnLongItemClickListener{
+        fun onLongItemClick(position: Int)
     }
 
 }

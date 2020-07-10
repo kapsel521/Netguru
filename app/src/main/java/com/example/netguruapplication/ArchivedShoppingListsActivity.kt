@@ -34,6 +34,7 @@ class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.O
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+
         getAllNotes()
     }
 

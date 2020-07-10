@@ -8,4 +8,5 @@
     <string name="current_lists">current lists</string>
     <string name="remove_shopping_list">remove list</string>
     <string name="remove_list">remove list</string>
+    <string name="move_to_archive">move to archive</string>
 </resources>

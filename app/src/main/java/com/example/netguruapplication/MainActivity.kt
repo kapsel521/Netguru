@@ -1,17 +1,19 @@
 package com.example.netguruapplication
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.realm.Realm
 import io.realm.RealmResults
 
-class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener, RecyclerViewAdapter.OnLongItemClickListener {
 
     private lateinit var addList: Button
     private lateinit var archivedLists: Button
@@ -52,12 +54,29 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
         finish()
     }
 
+    override fun onLongItemClick(position: Int) {
+        AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("Are You sure ?")
+            .setMessage("Do You want to delete shopping list ?")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                shopList.removeAt(position)
+                listRV.adapter?.notifyDataSetChanged()
+            })
+            .setNegativeButton("No", null)
+            .show()
+        Toast.makeText(this, "item deleted: $position", Toast.LENGTH_SHORT).show()
+
+    }
+
     private fun getAllNotes() {
         shopList = ArrayList()
         val results:RealmResults<Notes> = realm.where<Notes>(Notes::class.java).findAll()
-        listRV.adapter = RecyclerViewAdapter(this, results, this)
+        listRV.adapter = RecyclerViewAdapter(this, results,  this, this)
         listRV.adapter!!.notifyDataSetChanged()
     }
+
+    fun getRVsize():Int = shopList.size
 
 }
 
