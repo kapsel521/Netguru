@@ -8,7 +8,6 @@ import android.widget.EditText
 import android.widget.Toast
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import io.realm.kotlin.delete
 import java.lang.Exception
 
 class EditNoteActivity : AppCompatActivity() {
@@ -21,7 +20,7 @@ class EditNoteActivity : AppCompatActivity() {
     private lateinit var archivedLists: Button
     private lateinit var saveToArchive: Button
     private lateinit var realm: Realm
-    private lateinit var archivedRealm: Realm
+    private lateinit var archive: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +33,7 @@ class EditNoteActivity : AppCompatActivity() {
             .build()
 
         realm = Realm.getDefaultInstance()
-        archivedRealm = Realm.getInstance(archiveConfig)
+        archive = Realm.getInstance(archiveConfig)
         titleED = findViewById(R.id.title_edit_text)
         idED = findViewById(R.id.id)
         listED = findViewById(R.id.list_edit_text)
@@ -62,7 +61,7 @@ class EditNoteActivity : AppCompatActivity() {
 
     private fun saveListToArchiveDB() {
         try {
-            archivedRealm.beginTransaction()
+            archive.beginTransaction()
             val currentIdNumber:Number? = null
             val nextID:Int
 
@@ -77,8 +76,8 @@ class EditNoteActivity : AppCompatActivity() {
             notes.shopList = listED.text.toString()
             notes.id = nextID
 
-            archivedRealm.copyToRealmOrUpdate(notes)
-            archivedRealm.commitTransaction()
+            archive.copyToRealmOrUpdate(notes)
+            archive.commitTransaction()
 
             Toast.makeText(this,"List Added Sucessfully to archive", Toast.LENGTH_SHORT).show()
 

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,14 +13,18 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.Sort
+import java.lang.Exception
 
-class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener, RecyclerViewAdapter.OnLongItemClickListener {
+class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener,
+    RecyclerViewAdapter.OnLongItemClickListener {
 
     private lateinit var addList: Button
     private lateinit var archivedLists: Button
     private lateinit var listRV: RecyclerView
     private lateinit var shopList: ArrayList<Notes>
     private lateinit var realm: Realm
+    private lateinit var id: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,14 +60,16 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
     }
 
     override fun onLongItemClick(position: Int) {
+        id = findViewById(R.id.id_view)
+        val idInt: Int = Integer.valueOf(id.text.toString())
         AlertDialog.Builder(this)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .setTitle("Are You sure ?")
             .setMessage("Do You want to delete shopping list ?")
-            .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
-                shopList.removeAt(position)
-                listRV.adapter?.notifyDataSetChanged()
-            })
+            .setPositiveButton("Yes") { _, _ ->
+                delPosition(realm, idInt)
+                startActivity(Intent(this, MainActivity::class.java))
+            }
             .setNegativeButton("No", null)
             .show()
         Toast.makeText(this, "item deleted: $position", Toast.LENGTH_SHORT).show()
@@ -71,12 +78,25 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
 
     private fun getAllNotes() {
         shopList = ArrayList()
-        val results:RealmResults<Notes> = realm.where<Notes>(Notes::class.java).findAll()
-        listRV.adapter = RecyclerViewAdapter(this, results,  this, this)
+        val results: RealmResults<Notes> = realm.where<Notes>(Notes::class.java).sort("id", Sort.DESCENDING).findAll()
+        listRV.adapter = RecyclerViewAdapter(this, results, this, this)
         listRV.adapter!!.notifyDataSetChanged()
     }
 
-    fun getRVsize():Int = shopList.size
+    private fun delPosition(realm: Realm, id: Int): Boolean {
+        return try {
+            realm.beginTransaction()
+            realm.where(Notes::class.java).equalTo("id", id)
+                .findFirst()?.deleteFromRealm()
+            realm.commitTransaction()
+            Toast.makeText(this, "deleted!", Toast.LENGTH_SHORT).show()
+            true
+        }catch (e:Exception){
+            Toast.makeText(this, "not this time $e", Toast.LENGTH_SHORT).show()
+            false
+        }
+
+    }
 
 }
 

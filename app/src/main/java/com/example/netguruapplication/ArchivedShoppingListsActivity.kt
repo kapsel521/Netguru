@@ -12,9 +12,10 @@ import io.realm.RealmResults
 class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
 
     private lateinit var currentList: Button
-    private lateinit var shopList: ArrayList<ArchivedNotes>
-    private lateinit var archive: Realm
     private lateinit var listRV: RecyclerView
+    private lateinit var archivedList: ArrayList<ArchivedNotes>
+    private lateinit var archive: Realm
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,7 @@ class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.O
     }
 
     private fun getAllNotes() {
-        shopList = ArrayList()
+        archivedList = ArrayList()
         val resultsArchive: RealmResults<ArchivedNotes> = archive.where<ArchivedNotes>(ArchivedNotes::class.java).findAll()
         listRV.adapter = ArchiveRecyclerViewAdapter(this, resultsArchive, this)
         listRV.adapter!!.notifyDataSetChanged()

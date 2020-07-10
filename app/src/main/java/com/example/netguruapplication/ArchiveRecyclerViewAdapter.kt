@@ -8,16 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.card_view_layout.view.*
 
-class ArchiveRecyclerViewAdapter (
+class ArchiveRecyclerViewAdapter(
     private val context: Context?,
     private val archivedList: RealmResults<ArchivedNotes>,
     private val listener: RecyclerViewAdapter.OnItemClickListener
-): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view_layout, parent, false)
+        val v =
+            LayoutInflater.from(parent.context).inflate(R.layout.card_view_layout, parent, false)
 
         return ViewHolder(v)
-
     }
 
     override fun getItemCount(): Int {
@@ -30,7 +31,7 @@ class ArchiveRecyclerViewAdapter (
         holder.itemView.id_view.text = archivedList[position]!!.id.toString()
     }
 
-    inner class ViewHolder(v: View?): RecyclerView.ViewHolder(v!!), View.OnClickListener{
+    inner class ViewHolder(v: View?) : RecyclerView.ViewHolder(v!!), View.OnClickListener {
         val title = itemView.title_view
         val list = itemView.list_view
         val id = itemView.id_view
@@ -42,7 +43,7 @@ class ArchiveRecyclerViewAdapter (
 
         override fun onClick(v: View?) {
             val position = adapterPosition
-            if(position != RecyclerView.NO_POSITION) {
+            if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
             }
         }

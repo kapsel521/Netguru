@@ -13,10 +13,11 @@ class RecyclerViewAdapter(
     private val shopList: RealmResults<Notes>,
     private val listener: OnItemClickListener,
     private val listenerLong: OnLongItemClickListener
-): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view_layout, parent, false)
+        val v =
+            LayoutInflater.from(parent.context).inflate(R.layout.card_view_layout, parent, false)
 
         return ViewHolder(v)
     }
@@ -31,8 +32,8 @@ class RecyclerViewAdapter(
         holder.itemView.id_view.text = shopList[position]!!.id.toString()
     }
 
-    inner class ViewHolder(v:View?): RecyclerView.ViewHolder(v!!), View.OnClickListener,
-    View.OnLongClickListener{
+    inner class ViewHolder(v: View?) : RecyclerView.ViewHolder(v!!), View.OnClickListener,
+        View.OnLongClickListener {
         val title = itemView.title_view
         val list = itemView.list_view
         val id = itemView.id_view
@@ -41,20 +42,21 @@ class RecyclerViewAdapter(
         init {
             itemView.setOnClickListener(this)
         }
-        init{
+
+        init {
             itemView.setOnLongClickListener(this)
         }
 
         override fun onClick(v: View?) {
             val position = adapterPosition
-            if(position != RecyclerView.NO_POSITION) {
+            if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
             val position = adapterPosition
-            if(position != RecyclerView.NO_POSITION) {
+            if (position != RecyclerView.NO_POSITION) {
                 listenerLong.onLongItemClick(position)
                 return true
             }
@@ -63,11 +65,12 @@ class RecyclerViewAdapter(
 
 
     }
-    interface OnItemClickListener{
+
+    interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
 
-    interface OnLongItemClickListener{
+    interface OnLongItemClickListener {
         fun onLongItemClick(position: Int)
     }
 
