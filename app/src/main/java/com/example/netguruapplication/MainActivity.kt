@@ -1,6 +1,5 @@
 package com.example.netguruapplication
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
         listRV = findViewById(R.id.recyclerView)
 
         addList.setOnClickListener {
-            startActivity(Intent(this, EditNoteActivity::class.java))
+            startActivity(Intent(this, AddNoteActivity::class.java))
             finish()
         }
         archivedLists.setOnClickListener {
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
 
     override fun onItemClick(position: Int) {
         Toast.makeText(this, "item clicked: $position", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, EditNoteActivity::class.java))
+        startActivity(Intent(this, AddNoteActivity::class.java))
         finish()
     }
 
@@ -95,7 +94,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
             Toast.makeText(this, "not this time $e", Toast.LENGTH_SHORT).show()
             false
         }
-
     }
 
 }
