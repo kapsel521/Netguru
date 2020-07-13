@@ -59,7 +59,7 @@
             android:layout_weight="1.8"
             android:autofillHints="Your shopping list"
             android:gravity="top"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:text="@string/list_of_things"
             android:textColor="#000" />
 

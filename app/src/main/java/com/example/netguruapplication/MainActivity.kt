@@ -57,8 +57,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
         MySharedPreferences(this).setTitleValue(listRV[position].title_view.text.toString())
         MySharedPreferences(this).setListValue(listRV[position].list_view.text.toString())
 
-        val idInt = MySharedPreferences(this).getIdText()
-        Toast.makeText(this, "item clicked: $idInt", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, EditNoteActivity::class.java))
         finish()
     }

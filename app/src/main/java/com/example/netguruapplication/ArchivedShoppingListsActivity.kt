@@ -4,11 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.Sort
+import kotlinx.android.synthetic.main.card_view_layout.view.*
 
 class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
 
@@ -38,13 +41,17 @@ class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.O
     }
 
     override fun onItemClick(position: Int) {
+        MySharedPreferences(this).setIdValue(listRV[position].id_view.text.toString())
+        MySharedPreferences(this).setTitleValue(listRV[position].title_view.text.toString())
+        MySharedPreferences(this).setListValue(listRV[position].list_view.text.toString())
+
         startActivity(Intent(this, ArchivedNoteDetailsActivity::class.java))
         finish()
     }
 
     private fun getAllNotes() {
         archivedList = ArrayList()
-        val resultsArchive: RealmResults<ArchivedNotes> = realm.where<ArchivedNotes>(ArchivedNotes::class.java).findAll()
+        val resultsArchive: RealmResults<ArchivedNotes> = realm.where<ArchivedNotes>(ArchivedNotes::class.java).sort("id", Sort.DESCENDING).findAll()
         listRV.adapter = ArchiveRecyclerViewAdapter(this, resultsArchive, this)
         listRV.adapter!!.notifyDataSetChanged()
     }

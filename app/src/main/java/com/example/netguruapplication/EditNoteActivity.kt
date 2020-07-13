@@ -22,6 +22,7 @@ class EditNoteActivity : AppCompatActivity() {
     private lateinit var saveToArchive: Button
     private lateinit var delBtn: Button
     private lateinit var realm: Realm
+    private lateinit var realmArchive: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,7 @@ class EditNoteActivity : AppCompatActivity() {
         savedListBtn = findViewById(R.id.save_list)
         currentLists = findViewById(R.id.current_lists)
         archivedLists = findViewById(R.id.archived_lists)
+        saveToArchive = findViewById(R.id.save_list_to_archive)
         delBtn = findViewById(R.id.delete_button)
 
         idED.setText(MySharedPreferences(this).getIdText())
@@ -53,6 +55,20 @@ class EditNoteActivity : AppCompatActivity() {
             finish()
         }
 
+        saveToArchive.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Are You sure ?")
+                .setMessage("Do You want to move list to archive ?")
+                .setPositiveButton("Yes") { _, _ ->
+                    delPosition(realm, idED.text.toString().toInt())
+                    saveListToArchiveDB()
+                    startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
+                }
+                .setNegativeButton("No", null)
+                .show()
+        }
+
         delBtn.setOnClickListener {
             AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -67,6 +83,7 @@ class EditNoteActivity : AppCompatActivity() {
         }
 
         realm = Realm.getDefaultInstance()
+        realmArchive = Realm.getInstance(MyApp().archiveConfiguration())
     }
 
     private fun saveListToDB() {
@@ -101,6 +118,32 @@ class EditNoteActivity : AppCompatActivity() {
         }catch (e:Exception){
             Toast.makeText(this, "not this time $e", Toast.LENGTH_SHORT).show()
             false
+        }
+    }
+
+    private fun saveListToArchiveDB() {
+        try {
+            realmArchive.beginTransaction()
+            val currentIdNumber:Number? = realm.where<ArchivedNotes>(ArchivedNotes::class.java).findAll().max("id")
+            val nextID:Int
+            nextID = if (currentIdNumber == null){
+                0
+            }else{
+                currentIdNumber.toInt() + 1
+            }
+
+            val notes = ArchivedNotes()
+            notes.title = titleED.text.toString()
+            notes.shopList = listED.text.toString()
+            notes.id = nextID
+            realmArchive.copyToRealmOrUpdate(notes)
+            realmArchive.commitTransaction()
+            Toast.makeText(this,"List Added Sucessfully to archive", Toast.LENGTH_SHORT).show()
+
+            startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
+            finish()
+        }catch (e:Exception){
+            Toast.makeText(this,"Error $e", Toast.LENGTH_LONG).show()
         }
     }
 

@@ -57,7 +57,6 @@ class AddNoteActivity : AppCompatActivity() {
     }
 
     private fun saveListToDB() {
-
         try {
             realm.beginTransaction()
             val currentIdNumber:Number? = realm.where<Notes>(Notes::class.java).findAll().max("id")
@@ -87,13 +86,12 @@ class AddNoteActivity : AppCompatActivity() {
     private fun saveListToArchiveDB() {
         try {
             archive.beginTransaction()
-            val currentIdNumber:Number? = null
+            val currentIdNumber:Number? = archive.where<ArchivedNotes>(ArchivedNotes::class.java).findAll().max("id")
             val nextID:Int
-
             nextID = if (currentIdNumber == null){
-                1
+                0
             }else{
-                currentIdNumber.toInt()
+                currentIdNumber.toInt() + 1
             }
 
             val notes = ArchivedNotes()
