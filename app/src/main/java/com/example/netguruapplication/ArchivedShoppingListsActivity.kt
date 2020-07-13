@@ -4,9 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import io.realm.RealmResults
 
 class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
@@ -14,27 +15,24 @@ class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.O
     private lateinit var currentList: Button
     private lateinit var listRV: RecyclerView
     private lateinit var archivedList: ArrayList<ArchivedNotes>
-    private lateinit var archive: Realm
+    private lateinit var realm: Realm
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_archived_shopping_lists)
 
+        realm = Realm.getInstance(MyApp().archiveConfiguration())
         currentList = findViewById(R.id.currentList)
         listRV = findViewById(R.id.recyclerArchivedView)
 
-        val archiveConfig = RealmConfiguration.Builder()
-            .name("ArchivedList.db")
-            .deleteRealmIfMigrationNeeded()
-            .schemaVersion(0)
-            .build()
-        archive = Realm.getInstance(archiveConfig)
 
         currentList.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+
+        listRV.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
 
         getAllNotes()
     }
@@ -46,7 +44,7 @@ class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.O
 
     private fun getAllNotes() {
         archivedList = ArrayList()
-        val resultsArchive: RealmResults<ArchivedNotes> = archive.where<ArchivedNotes>(ArchivedNotes::class.java).findAll()
+        val resultsArchive: RealmResults<ArchivedNotes> = realm.where<ArchivedNotes>(ArchivedNotes::class.java).findAll()
         listRV.adapter = ArchiveRecyclerViewAdapter(this, resultsArchive, this)
         listRV.adapter!!.notifyDataSetChanged()
     }

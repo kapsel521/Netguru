@@ -29,14 +29,8 @@ class AddNoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_note)
 
-        val archiveConfig = RealmConfiguration.Builder()
-            .name("ArchivedList.db")
-            .deleteRealmIfMigrationNeeded()
-            .schemaVersion(0)
-            .build()
-
         realm = Realm.getDefaultInstance()
-        archive = Realm.getInstance(archiveConfig)
+        archive = Realm.getInstance(MyApp().archiveConfiguration())
         titleED = findViewById(R.id.title_edit_text)
         idED = findViewById(R.id.id_edit_text)
         listED = findViewById(R.id.list_edit_text)

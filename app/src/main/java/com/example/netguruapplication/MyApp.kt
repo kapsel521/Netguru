@@ -4,7 +4,7 @@ import android.app.Application
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
-open class MyApp: Application() {
+open class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -18,5 +18,15 @@ open class MyApp: Application() {
             .build()
 
         Realm.setDefaultConfiguration(configuration)
+
+        archiveConfiguration()
+    }
+
+    fun archiveConfiguration(): RealmConfiguration {
+        return RealmConfiguration.Builder()
+            .name("ArchivedList.db")
+            .deleteRealmIfMigrationNeeded()
+            .schemaVersion(0)
+            .build()
     }
 }

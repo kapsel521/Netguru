@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
         setContentView(R.layout.activity_main)
 
         realm = Realm.getDefaultInstance()
-
         addList = findViewById(R.id.add_list)
         archivedLists = findViewById(R.id.archived_lists)
         listRV = findViewById(R.id.recyclerView)
@@ -76,8 +75,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
             }
             .setNegativeButton("No", null)
             .show()
-        Toast.makeText(this, "item selected: $position", Toast.LENGTH_SHORT).show()
-
     }
 
     private fun getAllNotes() {
