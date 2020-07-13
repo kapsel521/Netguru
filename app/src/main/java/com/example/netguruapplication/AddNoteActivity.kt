@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.RealmResults
+import io.realm.Sort
 import java.lang.Exception
 
 class AddNoteActivity : AppCompatActivity() {
@@ -76,44 +78,14 @@ class AddNoteActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveListToArchiveDB() {
-        try {
-            archive.beginTransaction()
-            val currentIdNumber:Number? = null
-            val nextID:Int
-
-            nextID = if (currentIdNumber == null){
-                1
-            }else{
-                currentIdNumber.toInt()
-            }
-
-            val notes = ArchivedNotes()
-            notes.title = titleED.text.toString()
-            notes.shopList = listED.text.toString()
-            notes.id = nextID
-
-            archive.copyToRealmOrUpdate(notes)
-            archive.commitTransaction()
-
-            Toast.makeText(this,"List Added Sucessfully to archive", Toast.LENGTH_SHORT).show()
-
-            startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
-            finish()
-        }catch (e:Exception){
-            Toast.makeText(this,"Error $e", Toast.LENGTH_LONG).show()
-        }
-    }
-
     private fun saveListToDB() {
 
         try {
             realm.beginTransaction()
-            val currentIdNumber:Number? = realm.where(Notes::class.java).max("id")
+            val currentIdNumber:Number? = realm.where<Notes>(Notes::class.java).findAll().count()
             val nextID:Int
-
             nextID = if (currentIdNumber == null){
-                1
+                0
             }else{
                 currentIdNumber.toInt() + 1
             }
@@ -146,6 +118,35 @@ class AddNoteActivity : AppCompatActivity() {
         }catch (e:Exception){
             Toast.makeText(this, "not this time $e", Toast.LENGTH_SHORT).show()
             false
+        }
+    }
+
+    private fun saveListToArchiveDB() {
+        try {
+            archive.beginTransaction()
+            val currentIdNumber:Number? = null
+            val nextID:Int
+
+            nextID = if (currentIdNumber == null){
+                1
+            }else{
+                currentIdNumber.toInt()
+            }
+
+            val notes = ArchivedNotes()
+            notes.title = titleED.text.toString()
+            notes.shopList = listED.text.toString()
+            notes.id = nextID
+
+            archive.copyToRealmOrUpdate(notes)
+            archive.commitTransaction()
+
+            Toast.makeText(this,"List Added Sucessfully to archive", Toast.LENGTH_SHORT).show()
+
+            startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
+            finish()
+        }catch (e:Exception){
+            Toast.makeText(this,"Error $e", Toast.LENGTH_LONG).show()
         }
     }
 }

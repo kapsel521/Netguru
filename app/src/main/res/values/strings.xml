@@ -10,4 +10,6 @@
     <string name="remove_list">remove list</string>
     <string name="move_to_archive">move to archive</string>
     <string name="delete">delete</string>
+    <string name="line_1">Line 1</string>
+    <string name="line_2">Line 2</string>
 </resources>
