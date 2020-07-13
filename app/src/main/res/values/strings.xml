@@ -14,4 +14,13 @@
     <string name="line_2">Line 2</string>
     <string name="save_to_archive">save to archive</string>
     <string name="restore_list">restore list</string>
+    <string name="write_a_title">Write a title</string>
+    <string name="your_shopping_list">Your shopping list</string>
+    <string name="save">save</string>
+    <string name="archive">Archived Lists
+    </string>
+    <string name="list_of_shop_lists">Shopping Lists</string>
+    <string name="edit_note">Edit List</string>
+    <string name="view_archived">Archived List</string>
+    <string name="add_note">Add New List</string>
 </resources>

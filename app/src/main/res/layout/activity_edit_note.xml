@@ -44,10 +44,10 @@
                 android:visibility="gone" />
 
             <Button
-                android:id="@+id/delete_button"
+                android:id="@+id/save_list"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/delete"
+                android:text="@string/save"
                 android:src="@drawable/ic_delete_forever_black_24dp" />
         </LinearLayout>
 
@@ -76,12 +76,11 @@
                 android:text="@string/current_lists" />
 
             <Button
-                android:id="@+id/save_list"
+                android:id="@+id/delete_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
-                android:text="@string/save_shopping_list" />
-
+                android:text="@string/delete" />
         </LinearLayout>
 
         <LinearLayout

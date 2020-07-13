@@ -11,7 +11,8 @@ import kotlinx.android.synthetic.main.card_view_layout.view.*
 class ArchiveRecyclerViewAdapter(
     private val context: Context?,
     private val archivedList: RealmResults<ArchivedNotes>,
-    private val listener: RecyclerViewAdapter.OnItemClickListener
+    private val listener: RecyclerViewAdapter.OnItemClickListener,
+    private val listenerLong: RecyclerViewAdapter.OnLongItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -31,7 +32,8 @@ class ArchiveRecyclerViewAdapter(
         holder.itemView.id_view.text = archivedList[position]!!.id.toString()
     }
 
-    inner class ViewHolder(v: View?) : RecyclerView.ViewHolder(v!!), View.OnClickListener {
+    inner class ViewHolder(v: View?) : RecyclerView.ViewHolder(v!!), View.OnClickListener,
+        View.OnLongClickListener {
         val title = itemView.title_view
         val list = itemView.list_view
         val id = itemView.id_view
@@ -41,11 +43,24 @@ class ArchiveRecyclerViewAdapter(
             itemView.setOnClickListener(this)
         }
 
+        init {
+            itemView.setOnLongClickListener(this)
+        }
+
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
             }
+        }
+
+        override fun onLongClick(v: View?): Boolean {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listenerLong.onLongItemClick(position)
+                return true
+            }
+            return false
         }
     }
 

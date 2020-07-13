@@ -36,6 +36,8 @@ class EditNoteActivity : AppCompatActivity() {
         archivedLists = findViewById(R.id.archived_lists)
         saveToArchive = findViewById(R.id.save_list_to_archive)
         delBtn = findViewById(R.id.delete_button)
+        realm = Realm.getDefaultInstance()
+        realmArchive = Realm.getInstance(MyApp().archiveConfiguration())
 
         idED.setText(MySharedPreferences(this).getIdText())
         titleED.setText(MySharedPreferences(this).getTitleText())
@@ -81,9 +83,6 @@ class EditNoteActivity : AppCompatActivity() {
                 .setNegativeButton("No", null)
                 .show()
         }
-
-        realm = Realm.getDefaultInstance()
-        realmArchive = Realm.getInstance(MyApp().archiveConfiguration())
     }
 
     private fun saveListToDB() {
