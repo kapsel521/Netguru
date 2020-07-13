@@ -66,7 +66,7 @@ class AddNoteActivity : AppCompatActivity() {
 
         try {
             realm.beginTransaction()
-            val currentIdNumber:Number? = realm.where<Notes>(Notes::class.java).findAll().count()
+            val currentIdNumber:Number? = realm.where<Notes>(Notes::class.java).findAll().max("id")
             val nextID:Int
             nextID = if (currentIdNumber == null){
                 0

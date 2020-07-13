@@ -55,17 +55,10 @@ class EditNoteActivity : AppCompatActivity() {
     private fun saveListToDB() {
         try {
             realm.beginTransaction()
-            val currentIdNumber:Number? = realm.where<Notes>(Notes::class.java).findAll().count()
-            val nextID:Int
-            nextID = if (currentIdNumber == null){
-                0
-            }else{
-                currentIdNumber.toInt() + 1
-            }
             val notes = Notes()
             notes.title = titleED.text.toString()
             notes.shopList = listED.text.toString()
-            notes.id = nextID
+            notes.id = MySharedPreferences(this).getIdText()?.toInt()
 
             realm.copyToRealmOrUpdate(notes)
             realm.commitTransaction()

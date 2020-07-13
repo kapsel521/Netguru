@@ -15,7 +15,7 @@ class MySharedPreferences(context: Context) {
     val preferenceList = context.getSharedPreferences(NOTE_LIST_NAME, Context.MODE_PRIVATE)
 
     fun getIdText() : String? {
-        return preferenceTitle.getString(NOTE_ID_TEXT, "")
+        return preferenceId.getString(NOTE_ID_TEXT, "")
     }
 
     fun setIdValue(title: String){

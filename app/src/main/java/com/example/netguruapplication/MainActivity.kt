@@ -27,10 +27,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
     private lateinit var listRV: RecyclerView
     private lateinit var shopList: ArrayList<Notes>
     private lateinit var realm: Realm
-    private lateinit var id: TextView
-    private lateinit var titleTextView: TextView
-    private lateinit var listTextView: TextView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,13 +58,14 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
         MySharedPreferences(this).setTitleValue(listRV[position].title_view.text.toString())
         MySharedPreferences(this).setListValue(listRV[position].list_view.text.toString())
 
-        Toast.makeText(this, "item clicked: $position", Toast.LENGTH_SHORT).show()
+        val idInt = MySharedPreferences(this).getIdText()
+        Toast.makeText(this, "item clicked: $idInt", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, EditNoteActivity::class.java))
         finish()
     }
 
     override fun onLongItemClick(position: Int) {
-        val idInt: Int = Integer.valueOf(listRV[position].id_view.text.toString())
+        val idInt: Int = listRV[position].id_view.text.toString().toInt()
         AlertDialog.Builder(this)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .setTitle("Are You sure ?")
