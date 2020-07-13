@@ -38,7 +38,7 @@ class AddNoteActivity : AppCompatActivity() {
         realm = Realm.getDefaultInstance()
         archive = Realm.getInstance(archiveConfig)
         titleED = findViewById(R.id.title_edit_text)
-        idED = findViewById(R.id.id)
+        idED = findViewById(R.id.id_edit_text)
         listED = findViewById(R.id.list_edit_text)
         savedListBtn = findViewById(R.id.save_list)
         currentLists = findViewById(R.id.current_lists)
