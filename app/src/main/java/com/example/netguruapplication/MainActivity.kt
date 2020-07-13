@@ -58,7 +58,9 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
     }
 
     override fun onItemClick(position: Int) {
+        MySharedPreferences(this).setIdValue(listRV[position].id_view.text.toString())
         MySharedPreferences(this).setTitleValue(listRV[position].title_view.text.toString())
+        MySharedPreferences(this).setListValue(listRV[position].list_view.text.toString())
 
         Toast.makeText(this, "item clicked: $position", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, EditNoteActivity::class.java))
@@ -66,12 +68,11 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
     }
 
     override fun onLongItemClick(position: Int) {
-        id = findViewById(R.id.id_view)
-        val idInt: Int = Integer.valueOf(id.text.toString())
+        val idInt: Int = Integer.valueOf(listRV[position].id_view.text.toString())
         AlertDialog.Builder(this)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .setTitle("Are You sure ?")
-            .setMessage("Do You want to delete newest shopping list ?")
+            .setMessage("Do You want to delete shopping list ?")
             .setPositiveButton("Yes") { _, _ ->
                 delPosition(realm, idInt)
                 startActivity(Intent(this, MainActivity::class.java))
@@ -95,6 +96,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
             realm.where(Notes::class.java).equalTo("id", id)
                 .findFirst()?.deleteFromRealm()
             realm.commitTransaction()
+
             Toast.makeText(this, "deleted!: $id", Toast.LENGTH_SHORT).show()
             true
         }catch (e:Exception){

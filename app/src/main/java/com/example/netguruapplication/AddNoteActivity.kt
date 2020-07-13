@@ -22,7 +22,6 @@ class AddNoteActivity : AppCompatActivity() {
     private lateinit var currentLists: Button
     private lateinit var archivedLists: Button
     private lateinit var saveToArchive: Button
-    private lateinit var deleteBtn: Button
     private lateinit var realm: Realm
     private lateinit var archive: Realm
 
@@ -45,7 +44,6 @@ class AddNoteActivity : AppCompatActivity() {
         currentLists = findViewById(R.id.current_lists)
         archivedLists = findViewById(R.id.archived_lists)
         saveToArchive = findViewById(R.id.save_list_to_archive)
-        deleteBtn = findViewById(R.id.delete_button)
 
         currentLists.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
@@ -61,20 +59,6 @@ class AddNoteActivity : AppCompatActivity() {
 
         savedListBtn.setOnClickListener {
             saveListToDB()
-        }
-        deleteBtn.setOnClickListener {
-            val idInt: Int = Integer.valueOf(idED.text.toString())
-            AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Are You sure ?")
-                .setMessage("Do You want to delete shopping list ?")
-                .setPositiveButton("Yes") { _, _ ->
-                    delPosition(realm, idInt)
-                    startActivity(Intent(this, MainActivity::class.java))
-                }
-                .setNegativeButton("No", null)
-                .show()
-            Toast.makeText(this, "item deleted", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -97,27 +81,12 @@ class AddNoteActivity : AppCompatActivity() {
 
             realm.copyToRealmOrUpdate(notes)
             realm.commitTransaction()
-
             Toast.makeText(this,"List Added Sucessfully", Toast.LENGTH_SHORT).show()
 
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }catch (e:Exception){
             Toast.makeText(this,"Error $e", Toast.LENGTH_SHORT).show()
-        }
-
-    }
-    private fun delPosition(realm: Realm, id: Int): Boolean {
-        return try {
-            realm.beginTransaction()
-            realm.where(Notes::class.java).equalTo("id", id)
-                .findFirst()?.deleteFromRealm()
-            realm.commitTransaction()
-            Toast.makeText(this, "deleted!", Toast.LENGTH_SHORT).show()
-            true
-        }catch (e:Exception){
-            Toast.makeText(this, "not this time $e", Toast.LENGTH_SHORT).show()
-            false
         }
     }
 
