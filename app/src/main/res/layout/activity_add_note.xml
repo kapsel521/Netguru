@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +18,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/title_edit_text"
+                android:id="@+id/title_edit_text_an"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -31,14 +30,14 @@
                 android:textColor="#000" />
 
             <Button
-                android:id="@+id/save_list"
+                android:id="@+id/save_list_an"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:text="@string/save_shopping_list" />
 
             <EditText
-                android:id="@+id/id_edit_text"
+                android:id="@+id/id_edit_text_an"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -52,7 +51,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/list_edit_text"
+            android:id="@+id/list_edit_text_an"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="8dp"
@@ -68,8 +67,8 @@
 
 
             <Button
-                android:id="@+id/current_lists"
-                android:layout_width="match_parent"
+                android:id="@+id/current_lists_an"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
                 android:text="@string/current_lists" />
@@ -83,19 +82,21 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/archived_lists"
+                android:id="@+id/archived_lists_an"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
-                android:text="@string/archived_lists" />
+                android:text="@string/archived_lists"
+                tools:ignore="ButtonStyle" />
 
 
             <Button
-                android:id="@+id/save_list_to_archive"
+                android:id="@+id/save_list_to_archive_an"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
-                android:text="@string/save_to_archive" />
+                android:text="@string/save_to_archive"
+                tools:ignore="ButtonStyle" />
 
         </LinearLayout>
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/title_view"
+                android:id="@+id/title_view_and"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -30,7 +29,7 @@
                 android:textSize="22sp" />
 
             <TextView
-                android:id="@+id/id_view"
+                android:id="@+id/id_view_and"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -42,7 +41,7 @@
                 android:visibility="gone" />
 
             <Button
-                android:id="@+id/remove_list"
+                android:id="@+id/remove_list_and"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -50,7 +49,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/list_view"
+            android:id="@+id/list_view_and"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="8dp"
@@ -67,18 +66,20 @@
 
 
             <Button
-                android:id="@+id/archived_lists"
+                android:id="@+id/archived_lists_and"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
-                android:text="@string/archived_lists" />
+                android:text="@string/archived_lists"
+                tools:ignore="ButtonStyle" />
 
             <Button
-                android:id="@+id/current_lists"
+                android:id="@+id/current_lists_and"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
-                android:text="@string/current_lists" />
+                android:text="@string/current_lists"
+                tools:ignore="ButtonStyle" />
 
         </LinearLayout>
         <LinearLayout
@@ -86,8 +87,8 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/restore_list"
-                android:layout_width="match_parent"
+                android:id="@+id/restore_list_and"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
                 android:text="@string/restore_list" />
