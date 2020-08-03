@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="4dp"
-        android:layout_margin="8dp"
-        android:layout_above="@id/linearLayout"
-        tools:listitem="@layout/card_view_layout" />
-<LinearLayout
-    android:id="@+id/linearLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:layout_alignParentBottom="true" >
+        tools:context=".MainActivity">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/linearLayout"
+            android:layout_margin="8dp"
+            android:clipToPadding="false"
+            android:padding="4dp"
+            tools:listitem="@layout/card_view_layout" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp">
 
 
-    <Button
-        android:id="@+id/archived_lists"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_weight="1"
-        android:text="@string/archived_lists"
-        />
+            <Button
+                android:id="@+id/archived_lists"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="@string/archived_lists" />
 
-    <Button
-        android:id="@+id/add_list"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_weight="2"
-        android:text="@string/add_list"
-        />
+            <Button
+                android:id="@+id/add_list"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="2"
+                android:text="@string/add_list" />
 
-</LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</layout>
