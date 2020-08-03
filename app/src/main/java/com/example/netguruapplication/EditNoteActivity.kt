@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingUtil
+import com.example.netguruapplication.databinding.ActivityEditNoteBinding
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_edit_note.*
 
@@ -11,19 +13,21 @@ class EditNoteActivity : AppCompatActivity() {
 
     private lateinit var realm: Realm
     private lateinit var archive: Realm
+    private lateinit var binding: ActivityEditNoteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_note)
+        //setContentView(R.layout.activity_edit_note)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_note)
 
         realm = Realm.getDefaultInstance()
         archive = Realm.getInstance(MyApp().archiveConfiguration())
 
-        id_ed_en.setText(MySharedPreferences(this).getIdText())
-        title_edit_text_en.setText(MySharedPreferences(this).getTitleText())
-        list_edit_text_en.setText(MySharedPreferences(this).getListText())
+        binding.idEdEn.setText(MySharedPreferences(this).getIdText())
+        binding.titleEditTextEn.setText(MySharedPreferences(this).getTitleText())
+        binding.listEditTextEn.setText(MySharedPreferences(this).getListText())
 
-        save_list_en.setOnClickListener {
+        binding.saveListEn.setOnClickListener {
             RealmOperations().editListInDB(
                 realm,
                 this,
@@ -33,17 +37,7 @@ class EditNoteActivity : AppCompatActivity() {
             )
         }
 
-        current_lists_en.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-
-        archived_lists_en.setOnClickListener {
-            startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
-            finish()
-        }
-
-        save_list_to_archive_en.setOnClickListener {
+        binding.saveListToArchiveEn.setOnClickListener {
             AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Are You sure ?")
@@ -62,7 +56,18 @@ class EditNoteActivity : AppCompatActivity() {
                 .show()
         }
 
-        delete_button_en.setOnClickListener {
+        binding.currentListsEn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        binding.archivedListsEn.setOnClickListener {
+            startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
+            finish()
+        }
+
+
+        binding.deleteButtonEn.setOnClickListener {
             AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Are You sure ?")

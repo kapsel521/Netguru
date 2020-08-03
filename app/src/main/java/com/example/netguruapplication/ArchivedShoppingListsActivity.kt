@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.netguruapplication.databinding.ActivityArchivedShoppingListsBinding
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -18,20 +20,20 @@ class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.O
 
     private lateinit var archivedList: ArrayList<ArchivedNotes>
     private lateinit var archive: Realm
-
+    private lateinit var binding: ActivityArchivedShoppingListsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_archived_shopping_lists)
+        //setContentView(R.layout.activity_archived_shopping_lists)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_archived_shopping_lists)
 
         archive = Realm.getInstance(MyApp().archiveConfiguration())
 
-        current_list_arc.setOnClickListener {
+        binding.currentListArc.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
-            finish()
         }
 
-        recyclerArchivedView.layoutManager =
+        binding.recyclerArchivedView.layoutManager =
             StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
 
         RealmOperations().getAllArchivedNotes(archive, recyclerArchivedView, this, this, this)
@@ -43,7 +45,6 @@ class ArchivedShoppingListsActivity : AppCompatActivity(), RecyclerViewAdapter.O
         MySharedPreferences(this).setListValue(recyclerArchivedView[position].list_view.text.toString())
 
         startActivity(Intent(this, ArchivedNoteDetailsActivity::class.java))
-        finish()
     }
 
     override fun onLongItemClick(position: Int) {

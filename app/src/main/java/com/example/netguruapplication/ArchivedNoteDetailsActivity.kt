@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingUtil
+import com.example.netguruapplication.databinding.ActivityArchivedNoteDetailsBinding
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_archived_note_details.*
 
@@ -12,20 +14,22 @@ class ArchivedNoteDetailsActivity : AppCompatActivity() {
 
     private lateinit var realm: Realm
     private lateinit var archive: Realm
+    private lateinit var binding: ActivityArchivedNoteDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_archived_note_details)
+        //setContentView(R.layout.activity_archived_note_details)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_archived_note_details)
 
         realm = Realm.getDefaultInstance()
         archive = Realm.getInstance(MyApp().archiveConfiguration())
 
-        id_view_and.text = MySharedPreferences(this).getIdText()
-        title_view_and.text = MySharedPreferences(this).getTitleText()
-        list_view_and.text = MySharedPreferences(this).getListText()
-        list_view_and.movementMethod = ScrollingMovementMethod()
+        binding.idViewAnd.text = MySharedPreferences(this).getIdText()
+        binding.titleViewAnd.text = MySharedPreferences(this).getTitleText()
+        binding.listViewAnd.text = MySharedPreferences(this).getListText()
+        binding.listViewAnd.movementMethod = ScrollingMovementMethod()
 
-        remove_list_and.setOnClickListener {
+        binding.removeListAnd.setOnClickListener {
             AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Are You sure ?")
@@ -38,7 +42,7 @@ class ArchivedNoteDetailsActivity : AppCompatActivity() {
                 .show()
         }
 
-        restore_list_and.setOnClickListener {
+        binding.restoreListAnd.setOnClickListener {
             AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Are You sure ?")
@@ -52,11 +56,11 @@ class ArchivedNoteDetailsActivity : AppCompatActivity() {
                 .show()
         }
 
-        current_lists_and.setOnClickListener {
+        binding.currentListsAnd.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        archived_lists_and.setOnClickListener {
+        binding.archivedListsAnd.setOnClickListener {
             startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
             finish()
         }

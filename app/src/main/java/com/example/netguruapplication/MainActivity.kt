@@ -9,9 +9,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.get
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.netguruapplication.databinding.ActivityMainBinding
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -24,23 +26,25 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
     RecyclerViewAdapter.OnLongItemClickListener {
 
     private lateinit var realm: Realm
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         realm = Realm.getDefaultInstance()
 
-        add_list.setOnClickListener {
+        binding.addList.setOnClickListener {
             startActivity(Intent(this, AddNoteActivity::class.java))
             finish()
         }
-        archived_lists.setOnClickListener {
+        binding.archivedLists.setOnClickListener {
             startActivity(Intent(this, ArchivedShoppingListsActivity::class.java))
             finish()
         }
 
-        recyclerView.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
 
         RealmOperations().getAllNotes(realm, recyclerView, this, this, this)
 
@@ -51,7 +55,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListene
         MySharedPreferences(this).setTitleValue(recyclerView[position].title_view.text.toString())
         MySharedPreferences(this).setListValue(recyclerView[position].list_view.text.toString())
         startActivity(Intent(this, EditNoteActivity::class.java))
-        finish()
     }
 
     override fun onLongItemClick(position: Int) {

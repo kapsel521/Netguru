@@ -1,115 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddNoteActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="-203dp"
-        tools:layout_editor_absoluteY="188dp">
+        tools:context=".AddNoteActivity">
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="-203dp"
+            tools:layout_editor_absoluteY="188dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/title_edit_text_en"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="0.1"
+                    android:autofillHints="Write a title"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:text="@string/shopping_list"
+                    android:textColor="#000"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/id_ed_en"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="0.7"
+                    android:autofillHints="id"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:text=""
+                    android:textColor="#000"
+                    android:visibility="gone"
+                    tools:ignore="LabelFor" />
+
+                <Button
+                    android:id="@+id/save_list_en"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_delete_forever_black_24dp"
+                    android:text="@string/save" />
+            </LinearLayout>
 
             <EditText
-                android:id="@+id/title_edit_text_en"
+                android:id="@+id/list_edit_text_en"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_margin="8dp"
-                android:layout_weight="0.1"
-                android:autofillHints="Write a title"
-                android:gravity="center"
-                android:inputType="text"
-                android:text="@string/shopping_list"
+                android:layout_weight="1.8"
+                android:autofillHints="Your shopping list"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:text="@string/list_of_things"
                 android:textColor="#000"
                 tools:ignore="LabelFor" />
 
-            <EditText
-                android:id="@+id/id_ed_en"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="0.7"
-                android:autofillHints="id"
-                android:gravity="center"
-                android:inputType="text"
-                android:text=""
-                android:textColor="#000"
-                android:visibility="gone"
-                tools:ignore="LabelFor" />
-
-            <Button
-                android:id="@+id/save_list_en"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/save"
-                android:src="@drawable/ic_delete_forever_black_24dp" />
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/list_edit_text_en"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1.8"
-            android:autofillHints="Your shopping list"
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:text="@string/list_of_things"
-            android:textColor="#000"
-            tools:ignore="LabelFor" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_height="wrap_content">
 
 
-            <Button
-                android:id="@+id/current_lists_en"
+                <Button
+                    android:id="@+id/current_lists_en"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.04"
+                    android:text="@string/current_lists"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:id="@+id/delete_button_en"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.04"
+                    android:text="@string/delete"
+                    tools:ignore="ButtonStyle" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.04"
-                android:text="@string/current_lists"
-                tools:ignore="ButtonStyle" />
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/delete_button_en"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.04"
-                android:text="@string/delete"
-                tools:ignore="ButtonStyle" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/archived_lists_en"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.04"
-                android:text="@string/archived_lists"
-                tools:ignore="ButtonStyle" />
+                <Button
+                    android:id="@+id/archived_lists_en"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.04"
+                    android:text="@string/archived_lists"
+                    tools:ignore="ButtonStyle" />
 
 
-            <Button
-                android:id="@+id/save_list_to_archive_en"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.04"
-                android:text="@string/move_to_archive"
-                tools:ignore="ButtonStyle" />
+                <Button
+                    android:id="@+id/save_list_to_archive_en"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.04"
+                    android:text="@string/move_to_archive"
+                    tools:ignore="ButtonStyle" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
